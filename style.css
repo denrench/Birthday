@@ -1,0 +1,1568 @@
+/*==================================================
+            GOOGLE FONTS
+==================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/*==================================================
+                ROOT
+==================================================*/
+
+:root{
+
+    --bg:#060606;
+
+    --bg2:#111111;
+
+    --gold:#d4af37;
+
+    --gold-light:#f3d97c;
+
+    --white:#ffffff;
+
+    --text:#d7d7d7;
+
+    --glass:rgba(255,255,255,.06);
+
+    --border:rgba(255,255,255,.12);
+
+    --shadow:0 20px 60px rgba(0,0,0,.45);
+
+    --radius:26px;
+
+}
+
+/*==================================================
+                RESET
+==================================================*/
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:'Montserrat',sans-serif;
+
+    background:var(--bg);
+
+    color:var(--white);
+
+    overflow-x:hidden;
+
+    line-height:1.6;
+
+}
+
+/*==================================================
+            SCROLLBAR
+==================================================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0a0a0a;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:linear-gradient(
+
+        var(--gold),
+
+        #8f6c12
+
+    );
+
+    border-radius:50px;
+
+}
+
+/*==================================================
+            BACKGROUND
+==================================================*/
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-5;
+
+    overflow:hidden;
+
+    background:
+    radial-gradient(circle at top,#1d1d1d 0%,#060606 70%);
+
+}
+
+.gradient{
+
+    position:absolute;
+
+    width:550px;
+
+    height:550px;
+
+    border-radius:50%;
+
+    filter:blur(140px);
+
+    opacity:.18;
+
+    animation:float 18s ease-in-out infinite;
+
+}
+
+.gradient-1{
+
+    top:-180px;
+
+    left:-180px;
+
+    background:#ffcf58;
+
+}
+
+.gradient-2{
+
+    right:-150px;
+
+    top:25%;
+
+    background:#7b4dff;
+
+}
+
+.gradient-3{
+
+    bottom:-180px;
+
+    left:35%;
+
+    background:#18c7a5;
+
+}
+
+.noise{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:.04;
+
+    background-image:url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
+}
+
+/*==================================================
+                CONTAINER
+==================================================*/
+
+.container{
+
+    width:min(1180px,92%);
+
+    margin:auto;
+
+}
+
+/*==================================================
+                SECTIONS
+==================================================*/
+
+.section{
+
+    padding:120px 0;
+
+}
+
+.section-label{
+
+    display:inline-block;
+
+    color:var(--gold);
+
+    font-size:.85rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:4px;
+
+    margin-bottom:20px;
+
+}
+
+.section h2{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(42px,6vw,72px);
+
+    margin-bottom:25px;
+
+}
+
+.section-description{
+
+    color:var(--text);
+
+    max-width:720px;
+
+    margin:0 auto 45px;
+
+}
+/*==================================================
+                    HERO
+==================================================*/
+
+.hero{
+
+    position:relative;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    overflow:hidden;
+
+}
+
+.hero-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    radial-gradient(circle at center,
+    rgba(212,175,55,.08),
+    transparent 60%);
+
+    pointer-events:none;
+
+}
+
+.hero .container{
+
+    position:relative;
+
+    z-index:5;
+
+}
+
+.hero-label{
+
+    display:inline-block;
+
+    padding:10px 22px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.03);
+
+    backdrop-filter:blur(12px);
+
+    color:var(--gold);
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    font-size:.8rem;
+
+    margin-bottom:35px;
+
+}
+
+.hero-age{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:clamp(140px,20vw,300px);
+
+    font-weight:700;
+
+    line-height:.8;
+
+    color:var(--gold);
+
+    text-shadow:
+
+    0 0 40px rgba(212,175,55,.2),
+
+    0 0 90px rgba(212,175,55,.15);
+
+    animation:heroFloat 6s ease-in-out infinite;
+
+}
+
+.hero-title{
+
+    margin-top:25px;
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:clamp(44px,6vw,74px);
+
+}
+
+.hero-name{
+
+    margin-top:5px;
+
+    font-family:"Cormorant Garamond",serif;
+
+    color:var(--gold);
+
+    font-size:clamp(36px,5vw,60px);
+
+}
+
+.hero-date{
+
+    margin-top:28px;
+
+    color:var(--gold-light);
+
+    font-size:1.2rem;
+
+    letter-spacing:3px;
+
+}
+
+.hero-description{
+
+    width:min(760px,92%);
+
+    margin:40px auto;
+
+    color:var(--text);
+
+    font-size:1.08rem;
+
+    line-height:1.9;
+
+}
+
+.hero-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:14px;
+
+    padding:18px 42px;
+
+    border:none;
+
+    border-radius:100px;
+
+    cursor:pointer;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    color:#111;
+
+    background:
+
+    linear-gradient(
+    135deg,
+    var(--gold),
+    var(--gold-light)
+    );
+
+    box-shadow:
+
+    0 15px 40px rgba(212,175,55,.25);
+
+    transition:.35s;
+
+}
+
+.hero-button span{
+
+    font-size:1.2rem;
+
+    transition:.35s;
+
+}
+
+.hero-button:hover{
+
+    transform:
+
+    translateY(-6px)
+
+    scale(1.03);
+
+    box-shadow:
+
+    0 22px 55px rgba(212,175,55,.35);
+
+}
+
+.hero-button:hover span{
+
+    transform:translateY(4px);
+
+}
+
+/*==================================================
+            GLASS CARD
+==================================================*/
+
+.glass-card{
+
+    background:var(--glass);
+
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    border-radius:var(--radius);
+
+    padding:55px;
+
+    box-shadow:var(--shadow);
+
+    transition:.35s;
+
+}
+
+.glass-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:rgba(212,175,55,.25);
+
+}
+
+/*==================================================
+            INVITATION
+==================================================*/
+
+.invitation-card{
+
+    max-width:900px;
+
+    margin:auto;
+
+    text-align:center;
+
+}
+
+.invitation-card p{
+
+    margin-top:30px;
+
+    color:var(--text);
+
+    line-height:2;
+
+    font-size:1.08rem;
+
+}
+/*==================================================
+                TIMER
+==================================================*/
+
+.countdown-section{
+
+    text-align:center;
+
+}
+
+.timer{
+
+    margin-top:60px;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:28px;
+
+}
+
+.timer-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:40px 20px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    transition:.35s;
+
+}
+
+.timer-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        rgba(212,175,55,.10),
+
+        transparent
+
+    );
+
+    opacity:0;
+
+    transition:.35s;
+
+}
+
+.timer-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:rgba(212,175,55,.25);
+
+}
+
+.timer-card:hover::before{
+
+    opacity:1;
+
+}
+
+.timer-card span{
+
+    display:block;
+
+    font-size:72px;
+
+    font-weight:700;
+
+    color:var(--gold);
+
+    font-family:'Cormorant Garamond',serif;
+
+    line-height:1;
+
+}
+
+.timer-card small{
+
+    display:block;
+
+    margin-top:18px;
+
+    color:#cfcfcf;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+}
+
+.tick{
+
+    animation:tick .4s ease;
+
+}
+
+/*==================================================
+            INFO GRID
+==================================================*/
+
+.info-grid{
+
+    margin-top:60px;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+}
+
+.info-card{
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:28px;
+
+    padding:45px 30px;
+
+    text-align:center;
+
+    transition:.35s;
+
+}
+
+.info-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:rgba(212,175,55,.25);
+
+}
+
+.info-icon{
+
+    font-size:54px;
+
+    margin-bottom:25px;
+
+}
+
+.info-card h3{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:34px;
+
+    margin-bottom:15px;
+
+    color:var(--gold);
+
+}
+
+.info-card p{
+
+    color:var(--text);
+
+    line-height:1.8;
+
+}
+
+/*==================================================
+                MAP
+==================================================*/
+
+.map-card{
+
+    text-align:center;
+
+}
+
+.map-placeholder{
+
+    margin:45px auto;
+
+    height:360px;
+
+    border-radius:30px;
+
+    background:
+
+    linear-gradient(
+
+        145deg,
+
+        rgba(255,255,255,.06),
+
+        rgba(255,255,255,.02)
+
+    );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.map-placeholder::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:600px;
+
+    height:600px;
+
+    border-radius:50%;
+
+    background:rgba(212,175,55,.06);
+
+    animation:mapPulse 8s infinite;
+
+}
+
+.map-circle{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    border:4px solid var(--gold);
+
+    position:relative;
+
+    margin-bottom:20px;
+
+}
+
+.map-circle::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:15px;
+
+    border-radius:50%;
+
+    background:var(--gold);
+
+}
+
+.map-placeholder h3{
+
+    position:relative;
+
+    z-index:2;
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:38px;
+
+    color:var(--gold);
+
+}
+/*==================================================
+                GALLERY
+==================================================*/
+
+.gallery{
+
+    margin-top:70px;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:28px;
+
+}
+
+.gallery img{
+
+    width:100%;
+
+    height:360px;
+
+    object-fit:cover;
+
+    border-radius:28px;
+
+    cursor:pointer;
+
+    transition:.45s;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+
+}
+
+.gallery img:hover{
+
+    transform:scale(1.04);
+
+    border-color:rgba(212,175,55,.35);
+
+    box-shadow:
+
+    0 25px 70px rgba(212,175,55,.15);
+
+}
+
+/*==================================================
+                RSVP
+==================================================*/
+
+.rsvp-card{
+
+    max-width:900px;
+
+    margin:auto;
+
+}
+
+.input-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:30px;
+
+}
+
+.input-group label{
+
+    margin-bottom:12px;
+
+    color:var(--gold);
+
+    font-weight:600;
+
+}
+
+.input-group input,
+
+.input-group textarea{
+
+    width:100%;
+
+    padding:20px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    color:#fff;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.input-group input:focus,
+
+.input-group textarea:focus{
+
+    border-color:var(--gold);
+
+    box-shadow:
+
+    0 0 25px rgba(212,175,55,.15);
+
+}
+
+textarea{
+
+    resize:vertical;
+
+    min-height:160px;
+
+}
+
+/*==================================================
+            ANSWERS
+==================================================*/
+
+.answers{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:18px;
+
+    margin:40px 0;
+
+}
+
+.answers button{
+
+    padding:20px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.05);
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.35s;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.answers button:hover{
+
+    transform:translateY(-5px);
+
+    border-color:rgba(212,175,55,.3);
+
+}
+
+.answers button.active{
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    var(--gold),
+
+    var(--gold-light)
+
+    );
+
+    color:#111;
+
+    font-weight:700;
+
+}
+
+/*==================================================
+            SUBMIT BUTTON
+==================================================*/
+
+.submit-button{
+
+    width:100%;
+
+    margin-top:15px;
+
+    padding:22px;
+
+    border:none;
+
+    border-radius:60px;
+
+    cursor:pointer;
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    var(--gold),
+
+    var(--gold-light)
+
+    );
+
+    color:#111;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    transition:.35s;
+
+}
+
+.submit-button:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+
+    0 20px 55px rgba(212,175,55,.30);
+
+}
+
+/*==================================================
+            THANKS
+==================================================*/
+
+.thanks-card{
+
+    text-align:center;
+
+}
+
+.thanks-card p{
+
+    max-width:700px;
+
+    margin:35px auto 0;
+
+    line-height:2;
+
+    color:var(--text);
+
+}
+
+/*==================================================
+                FOOTER
+==================================================*/
+
+footer{
+
+    padding:80px 0;
+
+    text-align:center;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    margin-top:120px;
+
+}
+
+footer h3{
+
+    margin:20px 0;
+
+    font-size:42px;
+
+    color:var(--gold);
+
+    font-family:"Cormorant Garamond",serif;
+
+}
+
+footer p{
+
+    color:#aaa;
+
+}
+
+footer span{
+
+    color:var(--gold-light);
+
+}
+/*==================================================
+                LIGHTBOX
+==================================================*/
+
+.lightbox{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.92);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:9999;
+
+}
+
+.lightbox.active{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.lightbox-image{
+
+    width:min(90%,1100px);
+
+    max-height:85vh;
+
+    object-fit:contain;
+
+    border-radius:20px;
+
+    box-shadow:
+
+    0 25px 80px rgba(0,0,0,.55);
+
+}
+
+.lightbox-close{
+
+    position:absolute;
+
+    top:35px;
+
+    right:40px;
+
+    width:55px;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:34px;
+
+    background:rgba(255,255,255,.08);
+
+    color:#fff;
+
+    transition:.3s;
+
+}
+
+.lightbox-close:hover{
+
+    transform:rotate(90deg);
+
+    background:var(--gold);
+
+    color:#111;
+
+}
+
+/*==================================================
+            SUCCESS MODAL
+==================================================*/
+
+.success-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.82);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:10000;
+
+}
+
+.success-modal.active{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.success-box{
+
+    width:min(92%,520px);
+
+    padding:50px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    background:#111;
+
+    border:1px solid rgba(212,175,55,.25);
+
+    box-shadow:0 25px 70px rgba(0,0,0,.45);
+
+}
+
+.success-box h2{
+
+    font-family:"Cormorant Garamond",serif;
+
+    color:var(--gold);
+
+    font-size:52px;
+
+    margin-bottom:18px;
+
+}
+
+.success-box p{
+
+    color:var(--text);
+
+    margin-bottom:30px;
+
+}
+
+.success-box button{
+
+    padding:16px 40px;
+
+    border:none;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+
+    color:#111;
+
+    font-weight:700;
+
+}
+
+/*==================================================
+            SCROLL BUTTON
+==================================================*/
+
+.scroll-top{
+
+    position:fixed;
+
+    right:35px;
+
+    bottom:35px;
+
+    width:58px;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+
+    color:#111;
+
+    font-size:22px;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:500;
+
+}
+
+.scroll-top.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.scroll-top:hover{
+
+    transform:translateY(-5px);
+
+}
+
+/*==================================================
+            REVEAL
+==================================================*/
+
+.hidden{
+
+    opacity:0;
+
+    transform:translateY(70px);
+
+}
+
+.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+    transition:1s ease;
+
+}
+
+/*==================================================
+            PRELOADER
+==================================================*/
+
+.preloader{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#050505;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    z-index:100000;
+
+    transition:.6s;
+
+}
+
+.preloader.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+}
+
+.loader-circle{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    border:4px solid rgba(255,255,255,.1);
+
+    border-top:4px solid var(--gold);
+
+    animation:spin 1s linear infinite;
+
+}
+
+/*==================================================
+            ANIMATIONS
+==================================================*/
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+@keyframes heroFloat{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-15px);
+
+    }
+
+}
+
+@keyframes float{
+
+    0%,100%{
+
+        transform:translateY(0) scale(1);
+
+    }
+
+    50%{
+
+        transform:translateY(-35px) scale(1.05);
+
+    }
+
+}
+
+@keyframes tick{
+
+    0%{
+
+        transform:scale(.8);
+
+    }
+
+    50%{
+
+        transform:scale(1.15);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+@keyframes mapPulse{
+
+    0%{
+
+        transform:scale(.7);
+
+        opacity:.15;
+
+    }
+
+    100%{
+
+        transform:scale(1.3);
+
+        opacity:0;
+
+    }
+
+}
+
+/*==================================================
+            RESPONSIVE
+==================================================*/
+
+@media(max-width:992px){
+
+    .timer,
+
+    .info-grid,
+
+    .answers{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .gallery{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .hero-age{
+
+        font-size:120px;
+
+    }
+
+    .hero-title{
+
+        font-size:48px;
+
+    }
+
+    .hero-name{
+
+        font-size:40px;
+
+    }
+
+    .timer,
+
+    .info-grid,
+
+    .answers{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .glass-card{
+
+        padding:35px;
+
+    }
+
+    .gallery img{
+
+        height:260px;
+
+    }
+
+    .scroll-top{
+
+        right:20px;
+
+        bottom:20px;
+
+    }
+
+}
