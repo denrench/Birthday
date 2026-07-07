@@ -605,16 +605,19 @@ topButton.addEventListener("click",()=>{
 ==================================================*/
 function sendToTelegram(data) {
 
-    const TOKEN = "ТВОЙ_ТОКЕН_БОТА";
-    const CHAT_ID = "1388314161";
+    console.log("sendToTelegram вызвана");
 
-    const text =
-`🎉 Новый ответ на приглашение
+    const TOKEN = "AAGiFujlFdAMHp4zNTP9MXwogdk2bF0s2U0  ";
+    const CHAT_ID = "8378157846";
+
+    const text = `🎉 Новый ответ на приглашение
 
 👤 Имя: ${data.name}
 ✅ Ответ: ${data.answer}
 💬 Комментарий: ${data.comment || "нет"}
 🕒 ${data.created}`;
+
+    console.log("Отправляем:", text);
 
     fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
         method: "POST",
@@ -626,8 +629,15 @@ function sendToTelegram(data) {
             text: text
         })
     })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err));
+    .then(async (response) => {
+        console.log("HTTP:", response.status);
+
+        const result = await response.json();
+
+        console.log("Ответ Telegram:", result);
+    })
+    .catch((error) => {
+        console.error("Ошибка fetch:", error);
+    });
 
 }
