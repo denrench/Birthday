@@ -602,6 +602,25 @@ topButton.addEventListener("click",()=>{
     });
 
 });
+      /*==============================
+    MAGIC PARTICLES
+==============================*/
+
+const particles = document.querySelector(".particles");
+
+for(let i=0;i<80;i++){
+
+    const p=document.createElement("span");
+
+    p.style.left=Math.random()*100+"%";
+
+    p.style.animationDuration=8+Math.random()*10+"s";
+
+    p.style.animationDelay=Math.random()*8+"s";
+
+    particles.appendChild(p);
+
+}
 
 /*==================================================
                 NEXT PART
