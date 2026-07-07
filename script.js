@@ -541,21 +541,25 @@ if(rsvpForm){
 
         };
 
-        sendToTelegram(guest);
+       async function sendToTelegram(data) {
 
-        successModal.classList.add("active");
+    try {
 
-        rsvpForm.reset();
-
-        selectedAnswer="";
-
-        answerButtons.forEach(btn=>{
-
-            btn.classList.remove("active");
-
+        const response = await fetch("https://birthday-psi-rosy.vercel.app/api/telegram", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
         });
 
-    });
+        const result = await response.json();
+
+        console.log(result);
+
+    } catch (error) {
+        console.error(error);
+    }
 
 }
 
