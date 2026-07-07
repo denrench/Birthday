@@ -607,41 +607,26 @@ topButton.addEventListener("click",()=>{
                 NEXT PART
             TELEGRAM API
 ==================================================*/
-function sendToTelegram(data) {
+async function sendToTelegram(data) {
 
-    console.log("sendToTelegram вызвана");
+    try {
 
-    const TOKEN = "AAGiFujlFdAMHp4zNTP9MXwogdk2bF0s2U0  ";
-    const CHAT_ID = "8378157846";
-
-    const text = `🎉 Новый ответ на приглашение
-
-👤 Имя: ${data.name}
-✅ Ответ: ${data.answer}
-💬 Комментарий: ${data.comment || "нет"}
-🕒 ${data.created}`;
-
-    console.log("Отправляем:", text);
-
-    fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            chat_id: CHAT_ID,
-            text: text
-        })
-    })
-    .then(async (response) => {
-        console.log("HTTP:", response.status);
+        const response = await fetch("https://birthday-psi-rosy.vercel.app/api/telegram", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
 
         const result = await response.json();
 
-        console.log("Ответ Telegram:", result);
-    })
-    .catch((error) => {
-        console.error("Ошибка fetch:", error);
-    });
+        console.log(result);
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 
 }
