@@ -607,6 +607,23 @@ topButton.addEventListener("click",()=>{
                 NEXT PART
             TELEGRAM API
 ==================================================*/
+sendToTelegram(guest);
+
+successModal.classList.add("active");
+
+rsvpForm.reset();
+
+selectedAnswer = "";
+
+answerButtons.forEach(btn=>{
+
+    btn.classList.remove("active");
+
+});
+
+});
+
+}
 async function sendToTelegram(data) {
 
     try {
