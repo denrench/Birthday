@@ -1,620 +1,1058 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
+    <meta charset="UTF-8">
 
-<meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    >
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Приглашение на день рождения Лианы — 8 августа 2026 года"
+    >
 
-<title>25 лет Лианы</title>
+    <title>Лиана | День рождения 08.08.2026</title>
 
-<link
-rel="icon"
-href="favicon.ico">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-rel="preconnect"
-href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
 
-<link
-rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
-rel="stylesheet">
-
-<link
-rel="stylesheet"
-href="style.css">
-
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!--==============================
-        BACKGROUND
-===============================-->
+<!-- ==================================================
+                    LOADER
+================================================== -->
+
+<div id="loader" class="loader">
+
+    <div class="loader-content">
+
+        <div class="loader-date">
+            08.08.2026
+        </div>
+
+        <div class="loader-line"></div>
+
+        <div class="loader-text">
+            Загружаем приглашение...
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+                    BACKGROUND
+================================================== -->
 
 <div class="background">
 
-<div class="fog"></div>
+    <div class="background-overlay"></div>
 
-<div class="fog second"></div>
-
-<div class="particles"></div>
-
-<div class="vignette"></div>
+    <div class="particles"></div>
 
 </div>
 
-<!--==============================
-            HERO
-===============================-->
 
-<header class="hero">
+<!-- ==================================================
+                    NAVIGATION
+================================================== -->
 
-<img
-src="hero-background.webp"
-class="hero-bg"
-alt="">
+<header class="header">
 
-<img
-src="moon.png"
-class="moon"
-alt="">
+    <div class="header-container">
 
-<img
-src="castle.png"
-class="castle"
-alt="">
+        <a href="#home" class="logo">
+            L
+        </a>
 
-<img
-src="fog.png"
-class="fog-image"
-alt="">
+        <nav class="navigation">
 
-<img
-src="branch-left.png"
-class="branch-left"
-alt="">
+            <a href="#home">
+                Главная
+            </a>
 
-<img
-src="branch-right.png"
-class="branch-right"
-alt="">
+            <a href="#about">
+                О событии
+            </a>
 
-<div class="hero-overlay"></div>
+            <a href="#gallery">
+                Галерея
+            </a>
 
-<div class="container">
+            <a href="#location">
+                Место
+            </a>
 
-<span class="hero-subtitle">
+            <a href="#rsvp">
+                Ответить
+            </a>
 
-THE ENCHANTED INVITATION
+        </nav>
 
-</span>
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Открыть меню"
+        >
 
-<h1>
+            <span></span>
+            <span></span>
+            <span></span>
 
-25
+        </button>
 
-</h1>
-
-<div class="hero-line"></div>
-
-<h2>
-
-День рождения
-
-</h2>
-
-<h3>
-
-Лианы
-
-</h3>
-
-<p class="date">
-
-08 августа 2026
-
-</p>
-
-<p class="description">
-
-Иногда самые красивые истории
-начинаются одним приглашением.
-
-Я буду счастлива,
-если именно ты станешь
-частью этого вечера.
-
-</p>
-
-<a
-href="#welcome"
-class="button">
-
-Открыть приглашение
-
-</a>
-
-</div>
+    </div>
 
 </header>
 
+
+<!-- ==================================================
+                    HERO
+================================================== -->
+
 <main>
-    <!--==================================
-        WELCOME
-===================================-->
 
-<section id="welcome" class="welcome">
+<section id="home" class="hero section">
 
-<div class="container">
+    <div class="hero-overlay"></div>
 
-<div class="section-header">
+    <div class="hero-content">
 
-<span>
+        <div class="hero-subtitle">
+            Приглашение на день рождения
+        </div>
 
-✦ Добро пожаловать ✦
+        <h1 class="hero-title">
 
-</span>
+            <span class="hero-name">
+                Лиана
+            </span>
 
-<h2>
+        </h1>
 
-Волшебный вечер начинается здесь
+        <div class="hero-date">
 
-</h2>
+            <span>
+                08
+            </span>
 
-<div class="divider"></div>
+            <i class="fa-solid fa-star"></i>
 
-</div>
+            <span>
+                08
+            </span>
 
-<div class="welcome-card">
+            <i class="fa-solid fa-star"></i>
 
-<img
-src="ornament.png"
-class="ornament"
-alt="">
+            <span>
+                2026
+            </span>
 
-<p>
+        </div>
 
-Среди древнего леса,
+        <p class="hero-text">
 
-под светом полной луны,
+            Этот день хочется провести
+            рядом с теми, кто дорог.
 
-в окружении самых близких людей
+            <br>
 
-хочется отпраздновать
+            Поэтому я приглашаю тебя
+            разделить со мной этот особенный вечер.
 
-мой двадцать пятый день рождения.
+        </p>
 
-</p>
+        <a
+            href="#about"
+            class="hero-button button"
+        >
 
-<p>
+            Узнать подробности
 
-Пусть этот вечер
+            <i class="fa-solid fa-arrow-down"></i>
 
-станет наполнен улыбками,
+        </a>
 
-искренними разговорами,
+    </div>
 
-смехом,
+    <div class="scroll-indicator">
 
-объятиями
+        <span>
+            Листайте вниз
+        </span>
 
-и моментами,
+        <i class="fa-solid fa-chevron-down"></i>
 
-которые останутся в памяти
-
-ещё очень долго.
-
-</p>
-
-<blockquote>
-
-"Настоящее волшебство —
-это люди,
-которые делают обычный вечер
-незабываемым."
-
-</blockquote>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
-<!--==================================
-        COUNTDOWN
-===================================-->
 
-<section class="countdown">
+<!-- ==================================================
+                    ABOUT
+================================================== -->
 
-<div class="container">
+<section id="about" class="section about-section">
 
-<div class="section-header">
+    <div class="container">
 
-<span>
+        <div class="section-heading reveal">
 
-✦ До праздника ✦
+            <span class="section-subtitle">
+                Приглашение
+            </span>
 
-</span>
+            <h2>
+                Буду рада видеть тебя
+            </h2>
 
-<h2>
+            <div class="heading-line"></div>
 
-Магические часы
+        </div>
 
-</h2>
 
-<div class="divider"></div>
+        <div class="about-grid">
 
-</div>
+            <div class="about-text glass-card reveal">
 
-<div class="timer">
+                <div class="card-icon">
 
-<div class="timer-box">
+                    <i class="fa-regular fa-heart"></i>
 
-<div class="crystal"></div>
+                </div>
 
-<span id="days">
+                <h3>
+                    Давай отпразднуем вместе
+                </h3>
 
-00
+                <p>
 
-</span>
+                    День рождения — это ещё один повод
+                    собрать рядом близких людей,
+                    улыбаться, разговаривать,
+                    фотографироваться и просто
+                    хорошо провести время.
 
-<small>
+                </p>
 
-Дней
+                <p>
 
-</small>
+                    Мне будет очень приятно,
+                    если ты станешь частью этого дня.
 
-</div>
+                </p>
 
-<div class="timer-box">
+            </div>
 
-<div class="crystal"></div>
 
-<span id="hours">
+            <div class="about-date glass-card reveal">
 
-00
+                <div class="date-number">
+                    08
+                </div>
 
-</span>
+                <div class="date-month">
+                    АВГУСТА
+                </div>
 
-<small>
+                <div class="date-year">
+                    2026
+                </div>
 
-Часов
+            </div>
 
-</small>
+        </div>
 
-</div>
-
-<div class="timer-box">
-
-<div class="crystal"></div>
-
-<span id="minutes">
-
-00
-
-</span>
-
-<small>
-
-Минут
-
-</small>
-
-</div>
-
-<div class="timer-box">
-
-<div class="crystal"></div>
-
-<span id="seconds">
-
-00
-
-</span>
-
-<small>
-
-Секунд
-
-</small>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
-<!--==================================
-            GALLERY
-===================================-->
 
-<section class="gallery-section">
 
-<div class="container">
+<!-- ==================================================
+                    COUNTDOWN
+================================================== -->
 
-<div class="section-header">
+<section class="section countdown-section">
 
-<span>
+    <div class="container">
 
-✦ Воспоминания ✦
+        <div class="section-heading reveal">
 
-</span>
+            <span class="section-subtitle">
+                До встречи осталось
+            </span>
 
-<h2>
+            <h2>
+                Обратный отсчёт
+            </h2>
 
-Моменты, которые останутся навсегда
+            <div class="heading-line"></div>
 
-</h2>
+        </div>
 
-<div class="divider"></div>
 
-</div>
+        <div
+            id="countdown"
+            class="countdown-grid reveal"
+        >
 
-<div class="gallery">
+            <div class="timer-card glass-card">
 
-<figure class="gallery-item">
-<img src="gallery1.jpg" alt="">
-</figure>
+                <span
+                    id="days"
+                    class="timer-number"
+                >
+                    00
+                </span>
 
-<figure class="gallery-item">
-<img src="gallery2.jpg" alt="">
-</figure>
+                <span class="timer-label">
+                    Дней
+                </span>
 
-<figure class="gallery-item">
-<img src="gallery3.jpg" alt="">
-</figure>
+            </div>
 
-<figure class="gallery-item">
-<img src="gallery4.jpg" alt="">
-</figure>
 
-</div>
+            <div class="timer-card glass-card">
 
-</div>
+                <span
+                    id="hours"
+                    class="timer-number"
+                >
+                    00
+                </span>
 
-</section>
+                <span class="timer-label">
+                    Часов
+                </span>
 
-<!--==================================
-            LOCATION
-===================================-->
+            </div>
 
-<section class="location">
 
-<div class="container">
+            <div class="timer-card glass-card">
 
-<div class="section-header">
+                <span
+                    id="minutes"
+                    class="timer-number"
+                >
+                    00
+                </span>
 
-<span>
+                <span class="timer-label">
+                    Минут
+                </span>
 
-✦ Место встречи ✦
+            </div>
 
-</span>
 
-<h2>
+            <div class="timer-card glass-card">
 
-Там, где начнётся сказка
+                <span
+                    id="seconds"
+                    class="timer-number"
+                >
+                    00
+                </span>
 
-</h2>
+                <span class="timer-label">
+                    Секунд
+                </span>
 
-<div class="divider"></div>
+            </div>
 
-</div>
+        </div>
 
-<div class="location-card">
-
-<h3>
-
-📍 Место проведения
-
-</h3>
-
-<p>
-
-(Здесь укажи адрес ресторана или локации)
-
-</p>
-
-<h3>
-
-🕕 Начало
-
-</h3>
-
-<p>
-
-08 августа 2026 • 18:00
-
-</p>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
-<!--==================================
-                RSVP
-===================================-->
 
-<section id="rsvp">
+<!-- ==================================================
+                    GALLERY
+================================================== -->
 
-<div class="container">
+<section
+    id="gallery"
+    class="section gallery-section"
+>
 
-<div class="section-header">
+    <div class="container">
 
-<span>
+        <div class="section-heading reveal">
 
-✦ Подтверждение ✦
+            <span class="section-subtitle">
+                Немного меня
+            </span>
 
-</span>
+            <h2>
+                Галерея
+            </h2>
 
-<h2>
+            <div class="heading-line"></div>
 
-Сможешь ли ты прийти?
+            <p class="section-description">
 
-</h2>
+                Несколько фотографий,
+                которые хочется сохранить
+                в этом приглашении.
 
-<div class="divider"></div>
+            </p>
+
+        </div>
+
+
+        <div class="gallery-grid">
+
+
+            <!-- PHOTO 1 -->
+
+            <div
+                class="gallery-item gallery-item-large reveal"
+                data-image="photo-1.jpg"
+            >
+
+                <img
+                    src="photo-1.jpg"
+                    alt="Фотография Лианы"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 2 -->
+
+            <div
+                class="gallery-item reveal"
+                data-image="photo-2.jpg"
+            >
+
+                <img
+                    src="photo-2.jpg"
+                    alt="Фотография Лианы"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 3 -->
+
+            <div
+                class="gallery-item reveal"
+                data-image="photo-3.jpg"
+            >
+
+                <img
+                    src="photo-3.jpg"
+                    alt="Фотография Лианы"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 4 -->
+
+            <div
+                class="gallery-item gallery-item-wide reveal"
+                data-image="photo-4.jpg"
+            >
+
+                <img
+                    src="photo-4.jpg"
+                    alt="Фотография Лианы"
+                    loading="lazy"
+                >
+
+                <div class="gallery-overlay">
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+                    EVENT INFO
+================================================== -->
+
+<section class="section event-section">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <span class="section-subtitle">
+                Всё самое важное
+            </span>
+
+            <h2>
+                Детали вечера
+            </h2>
+
+            <div class="heading-line"></div>
+
+        </div>
+
+
+        <div class="event-grid">
+
+
+            <!-- DATE -->
+
+            <div class="event-card glass-card reveal">
+
+                <div class="event-icon">
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                </div>
+
+                <h3>
+                    Дата
+                </h3>
+
+                <p>
+                    8 августа 2026 года
+                </p>
+
+            </div>
+
+
+            <!-- TIME -->
+
+            <div class="event-card glass-card reveal">
+
+                <div class="event-icon">
+
+                    <i class="fa-regular fa-clock"></i>
+
+                </div>
+
+                <h3>
+                    Время
+                </h3>
+
+                <p>
+                    Скоро сообщу
+                </p>
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div class="event-card glass-card reveal">
+
+                <div class="event-icon">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+                <h3>
+                    Место
+                </h3>
+
+                <p>
+                    Скоро сообщу
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+                    LOCATION
+================================================== -->
+
+<section
+    id="location"
+    class="section location-section"
+>
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <span class="section-subtitle">
+                Где мы встретимся
+            </span>
+
+            <h2>
+                Место проведения
+            </h2>
+
+            <div class="heading-line"></div>
+
+        </div>
+
+
+        <div class="location-card glass-card reveal">
+
+            <div class="location-icon">
+
+                <i class="fa-solid fa-map-location-dot"></i>
+
+            </div>
+
+            <h3>
+                Место проведения
+            </h3>
+
+            <p class="location-address">
+                Адрес будет указан здесь
+            </p>
+
+            <p class="location-description">
+
+                Здесь появится подробная информация
+                о месте проведения праздника.
+
+            </p>
+
+            <a
+                href="#"
+                class="button location-button"
+                id="mapButton"
+                target="_blank"
+            >
+
+                <i class="fa-solid fa-map"></i>
+
+                Открыть карту
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+                    RSVP
+================================================== -->
+
+<section
+    id="rsvp"
+    class="section rsvp-section"
+>
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <span class="section-subtitle">
+                Очень жду твоего ответа
+            </span>
+
+            <h2>
+                Ты придёшь?
+            </h2>
+
+            <div class="heading-line"></div>
+
+            <p class="section-description">
+
+                Пожалуйста, сообщи,
+                сможешь ли ты быть со мной
+                в этот особенный день.
+
+            </p>
+
+        </div>
+
+
+        <div class="rsvp-card glass-card reveal">
+
+            <form
+                id="rsvpForm"
+                class="rsvp-form"
+            >
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="guestName">
+                        Твоё имя
+                    </label>
+
+                    <input
+                        type="text"
+                        id="guestName"
+                        name="name"
+                        placeholder="Например, Данил"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ANSWER -->
+
+                <div class="form-group">
+
+                    <label>
+                        Твой ответ
+                    </label>
+
+
+                    <div class="answers">
+
+
+                        <button
+                            type="button"
+                            class="answer-button"
+                            data-answer="Приду"
+                        >
+
+                            <i class="fa-solid fa-heart"></i>
+
+                            Приду
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="answer-button"
+                            data-answer="Возможно"
+                        >
+
+                            <i class="fa-solid fa-question"></i>
+
+                            Возможно
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="answer-button"
+                            data-answer="Не смогу"
+                        >
+
+                            <i class="fa-solid fa-xmark"></i>
+
+                            Не смогу
+
+                        </button>
+
+
+                    </div>
+
+                    <input
+                        type="hidden"
+                        id="guestAnswer"
+                        name="answer"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div class="form-group">
+
+                    <label for="guestMessage">
+                        Сообщение
+                        <span>
+                            (необязательно)
+                        </span>
+                    </label>
+
+                    <textarea
+                        id="guestMessage"
+                        name="message"
+                        placeholder="Можешь оставить сообщение..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="button submit-button"
+                >
+
+                    <span>
+                        Отправить ответ
+                    </span>
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                </button>
+
+
+                <!-- FORM STATUS -->
+
+                <div
+                    id="formStatus"
+                    class="form-status"
+                ></div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+                    FINAL MESSAGE
+================================================== -->
+
+<section class="section final-section">
+
+    <div class="container">
+
+        <div class="final-content reveal">
+
+            <div class="final-icon">
+
+                <i class="fa-regular fa-heart"></i>
+
+            </div>
+
+            <h2>
+                До встречи!
+            </h2>
+
+            <p>
+
+                Спасибо, что разделяешь
+                этот день вместе со мной.
+
+            </p>
+
+            <div class="final-date">
+
+                08.08.2026
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ==================================================
+                    LIGHTBOX
+================================================== -->
+
+<div
+    id="lightbox"
+    class="lightbox"
+>
+
+    <button
+        id="lightboxClose"
+        class="lightbox-close"
+        aria-label="Закрыть"
+    >
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+
+    <button
+        id="lightboxPrev"
+        class="lightbox-arrow lightbox-prev"
+        aria-label="Предыдущее фото"
+    >
+
+        <i class="fa-solid fa-chevron-left"></i>
+
+    </button>
+
+
+    <div class="lightbox-content">
+
+        <img
+            id="lightboxImage"
+            src=""
+            alt="Просмотр фотографии"
+        >
+
+    </div>
+
+
+    <button
+        id="lightboxNext"
+        class="lightbox-arrow lightbox-next"
+        aria-label="Следующее фото"
+    >
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+    </button>
 
 </div>
 
-<form id="rsvpForm">
 
-<input
+<!-- ==================================================
+                    SUCCESS MODAL
+================================================== -->
 
-type="text"
+<div
+    id="successModal"
+    class="success-modal"
+>
 
-id="name"
+    <div class="success-box">
 
-placeholder="Ваше имя"
+        <button
+            id="successClose"
+            class="success-close"
+            aria-label="Закрыть"
+        >
 
-required>
+            <i class="fa-solid fa-xmark"></i>
 
-<div class="answers">
+        </button>
+
+        <div class="success-icon">
+
+            <i class="fa-solid fa-heart"></i>
+
+        </div>
+
+        <h2>
+            Спасибо!
+        </h2>
+
+        <p id="successMessage">
+
+            Твой ответ отправлен.
+
+        </p>
+
+        <button
+            id="successButton"
+            class="button"
+        >
+
+            Отлично
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+                    SCROLL TOP
+================================================== -->
 
 <button
+    id="scrollTop"
+    class="scroll-top"
+    aria-label="Наверх"
+>
 
-type="button"
-
-class="answer-btn"
-
-data-answer="Приду">
-
-✨ Приду
+    <i class="fa-solid fa-arrow-up"></i>
 
 </button>
 
-<button
 
-type="button"
+<!-- ==================================================
+                    FOOTER
+================================================== -->
 
-class="answer-btn"
+<footer class="footer">
 
-data-answer="Пока не знаю">
+    <div class="container">
 
-🌙 Пока не знаю
+        <div class="footer-content">
 
-</button>
+            <div class="footer-logo">
+                L
+            </div>
 
-<button
+            <p>
+                С любовью и до встречи
+            </p>
 
-type="button"
+            <div class="footer-date">
+                08.08.2026
+            </div>
 
-class="answer-btn"
+        </div>
 
-data-answer="Не смогу">
-
-🥀 Не смогу
-
-</button>
-
-</div>
-
-<textarea
-
-id="comment"
-
-placeholder="Напишите пожелание (необязательно)"></textarea>
-
-<button
-
-type="submit"
-
-class="button">
-
-Отправить ответ
-
-</button>
-
-</form>
-
-</div>
-
-</section>
-<!--==================================
-            FOOTER
-===================================-->
-
-<footer>
-
-<div class="container">
-
-<div class="footer-logo">
-
-25
-
-</div>
-
-<p>
-
-Спасибо,
-
-что станешь частью
-
-этого волшебного вечера.
-
-</p>
-
-<div class="footer-line"></div>
-
-<span>
-
-08 • 08 • 2026
-
-</span>
-
-</div>
+    </div>
 
 </footer>
 
-<!--==================================
-        SUCCESS MODAL
-===================================-->
 
-<div id="successModal" class="modal">
-
-<div class="modal-content">
-
-<div class="modal-glow"></div>
-
-<h2>
-
-✨ Спасибо!
-
-</h2>
-
-<p>
-
-Твой ответ успешно отправлен.
-
-До встречи на празднике!
-
-</p>
-
-<button id="closeModal" class="button">
-
-Закрыть
-
-</button>
-
-</div>
-
-</div>
-
-</main>
+<!-- ==================================================
+                    JAVASCRIPT
+================================================== -->
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
