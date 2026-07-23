@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
        LOADER
     ================================================== */
 
-    const loader = document.getElementById("loader");
+    const loader =
+        document.getElementById("loader");
 
     window.addEventListener("load", () => {
 
@@ -40,9 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                menuToggle.classList.toggle("active");
+                menuToggle.classList.toggle(
+                    "active"
+                );
 
-                navigation.classList.toggle("active");
+                navigation.classList.toggle(
+                    "active"
+                );
 
                 document.body.classList.toggle(
                     "no-scroll"
@@ -94,11 +99,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (window.scrollY > 50) {
 
-            header.classList.add("scrolled");
+            header.classList.add(
+                "scrolled"
+            );
 
         } else {
 
-            header.classList.remove("scrolled");
+            header.classList.remove(
+                "scrolled"
+            );
 
         }
 
@@ -125,7 +134,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 function (event) {
 
                     const targetId =
-                        this.getAttribute("href");
+                        this.getAttribute(
+                            "href"
+                        );
 
                     if (
                         !targetId ||
@@ -186,17 +197,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /*
-        ВАЖНО:
+        Дата праздника:
 
-        Здесь указана дата:
-
-        8 августа 2026 года
-
-        Время:
+        08.08.2026
         18:00
 
-        Если праздник будет в другое время,
-        потом изменим эту строку.
+        Если время изменится,
+        поменяем эту строку.
     */
 
     const birthdayDate =
@@ -226,16 +233,20 @@ document.addEventListener("DOMContentLoaded", () => {
         if (difference <= 0) {
 
             if (daysElement)
-                daysElement.textContent = "00";
+                daysElement.textContent =
+                    "00";
 
             if (hoursElement)
-                hoursElement.textContent = "00";
+                hoursElement.textContent =
+                    "00";
 
             if (minutesElement)
-                minutesElement.textContent = "00";
+                minutesElement.textContent =
+                    "00";
 
             if (secondsElement)
-                secondsElement.textContent = "00";
+                secondsElement.textContent =
+                    "00";
 
             return;
 
@@ -328,50 +339,71 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    const revealObserver =
-        new IntersectionObserver(
+    if (
+        "IntersectionObserver"
+        in window
+    ) {
 
-            entries => {
+        const revealObserver =
+            new IntersectionObserver(
 
-                entries.forEach(
-                    entry => {
+                entries => {
 
-                        if (
-                            entry.isIntersecting
-                        ) {
+                    entries.forEach(
+                        entry => {
 
-                            entry.target
-                                .classList
-                                .add("show");
+                            if (
+                                entry.isIntersecting
+                            ) {
 
-                            revealObserver
-                                .unobserve(
-                                    entry.target
-                                );
+                                entry.target
+                                    .classList
+                                    .add(
+                                        "show"
+                                    );
+
+                                revealObserver
+                                    .unobserve(
+                                        entry.target
+                                    );
+
+                            }
 
                         }
+                    );
 
-                    }
-                );
+                },
 
-            },
+                {
+                    threshold: 0.12
+                }
 
-            {
-                threshold: 0.12
-            }
-
-        );
-
-
-    revealElements.forEach(
-        element => {
-
-            revealObserver.observe(
-                element
             );
 
-        }
-    );
+
+        revealElements.forEach(
+            element => {
+
+                revealObserver.observe(
+                    element
+                );
+
+            }
+        );
+
+    } else {
+
+        revealElements.forEach(
+            element => {
+
+                element.classList.add(
+                    "show"
+                );
+
+            }
+        );
+
+    }
 
 
     /* ==================================================
@@ -416,17 +448,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentImageIndex = 0;
 
-
-    /*
-        Здесь указываем все 4 фотографии.
-
-        Формат:
-
-        photo-1.jpeg
-        photo-2.jpeg
-        photo-3.jpeg
-        photo-4.jpeg
-    */
 
     const galleryImages = [
 
@@ -490,20 +511,16 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        setTimeout(
-            () => {
+        setTimeout(() => {
 
-                if (lightboxImage) {
+            if (lightboxImage) {
 
-                    lightboxImage.src =
-                        "";
+                lightboxImage.src =
+                    "";
 
-                }
+            }
 
-            },
-
-            400
-        );
+        }, 400);
 
     }
 
@@ -703,14 +720,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 "click",
                 () => {
 
-
                     answerButtons.forEach(
                         item => {
 
-                            item.classList
-                                .remove(
-                                    "active"
-                                );
+                            item.classList.remove(
+                                "active"
+                            );
 
                         }
                     );
@@ -740,7 +755,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       RSVP FORM
+       RSVP FORM + TELEGRAM
     ================================================== */
 
     const rsvpForm =
@@ -777,19 +792,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById(
             "successButton"
         );
-
-
-    /*
-        ВАЖНО:
-
-        Сейчас форма работает визуально.
-
-        Ниже будет подключён
-        Telegram Backend / API.
-
-        Когда мы подключим Telegram,
-        здесь будет реальная отправка.
-    */
 
 
     if (rsvpForm) {
@@ -831,12 +833,22 @@ document.addEventListener("DOMContentLoaded", () => {
                         : "";
 
 
+                /* ------------------------------
+                   VALIDATION
+                ------------------------------ */
+
                 if (!name) {
 
                     if (formStatus) {
 
                         formStatus.textContent =
                             "Пожалуйста, введи своё имя.";
+
+                    }
+
+                    if (nameInput) {
+
+                        nameInput.focus();
 
                     }
 
@@ -859,6 +871,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
 
+                /* ------------------------------
+                   LOADING
+                ------------------------------ */
+
+                const submitButton =
+                    rsvpForm.querySelector(
+                        'button[type="submit"]'
+                    );
+
+
+                if (submitButton) {
+
+                    submitButton.disabled =
+                        true;
+
+                    submitButton.style.opacity =
+                        "0.6";
+
+                    submitButton.style.pointerEvents =
+                        "none";
+
+                }
+
+
                 if (formStatus) {
 
                     formStatus.textContent =
@@ -867,72 +903,165 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
 
-                /*
-                    ПОКА ЧТО ИМИТАЦИЯ ОТПРАВКИ.
+                try {
 
-                    Следующим этапом
-                    подключим сюда Telegram.
-                */
+                    /* --------------------------
+                       SEND TO VERCEL API
+                    -------------------------- */
+
+                    const response =
+                        await fetch(
+                            "/api/telegram",
+                            {
+
+                                method:
+                                    "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json"
+
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        name:
+                                            name,
+
+                                        answer:
+                                            answer,
+
+                                        message:
+                                            message
+
+                                    })
+
+                            }
+                        );
 
 
-                await new Promise(
-                    resolve =>
-                        setTimeout(
-                            resolve,
-                            700
-                        )
-                );
+                    let result = {};
+
+                    try {
+
+                        result =
+                            await response.json();
+
+                    } catch (jsonError) {
+
+                        result = {};
+
+                    }
 
 
-                if (successMessage) {
+                    /* --------------------------
+                       SERVER ERROR
+                    -------------------------- */
 
-                    successMessage.textContent =
-                        `Спасибо, ${name}! Твой ответ «${answer}» отправлен.`;
+                    if (
+                        !response.ok ||
+                        !result.success
+                    ) {
 
-                }
+                        throw new Error(
+                            result.message ||
+                            "Не удалось отправить ответ."
+                        );
+
+                    }
 
 
-                if (successModal) {
+                    /* --------------------------
+                       SUCCESS
+                    -------------------------- */
 
-                    successModal.classList.add(
-                        "active"
+                    if (successMessage) {
+
+                        successMessage.textContent =
+                            `Спасибо, ${name}! Твой ответ «${answer}» успешно отправлен.`;
+
+                    }
+
+
+                    if (successModal) {
+
+                        successModal.classList.add(
+                            "active"
+                        );
+
+                    }
+
+
+                    document.body.classList.add(
+                        "no-scroll"
                     );
 
-                }
+
+                    /* --------------------------
+                       RESET FORM
+                    -------------------------- */
+
+                    rsvpForm.reset();
 
 
-                document.body.classList.add(
-                    "no-scroll"
-                );
+                    answerButtons.forEach(
+                        button => {
 
-
-                rsvpForm.reset();
-
-
-                answerButtons.forEach(
-                    button => {
-
-                        button.classList
-                            .remove(
+                            button.classList.remove(
                                 "active"
                             );
 
+                        }
+                    );
+
+
+                    if (guestAnswer) {
+
+                        guestAnswer.value =
+                            "";
+
                     }
-                );
 
 
-                if (guestAnswer) {
+                    if (formStatus) {
 
-                    guestAnswer.value =
-                        "";
+                        formStatus.textContent =
+                            "";
 
-                }
+                    }
 
 
-                if (formStatus) {
+                } catch (error) {
 
-                    formStatus.textContent =
-                        "";
+                    console.error(
+                        "RSVP Error:",
+                        error
+                    );
+
+
+                    if (formStatus) {
+
+                        formStatus.textContent =
+                            "Не удалось отправить ответ. Попробуй ещё раз.";
+
+                    }
+
+                } finally {
+
+                    if (submitButton) {
+
+                        submitButton.disabled =
+                            false;
+
+                        submitButton.style.opacity =
+                            "";
+
+                        submitButton.style.pointerEvents =
+                            "";
+
+                    }
 
                 }
 
@@ -1059,9 +1188,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 window.scrollTo({
 
-                    top: 0,
+                    top:
+                        0,
 
-                    behavior: "smooth"
+                    behavior:
+                        "smooth"
 
                 });
 
@@ -1079,14 +1210,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById(
             "mapButton"
         );
-
-
-    /*
-        Пока адрес неизвестен.
-
-        Когда ты скажешь точное место,
-        сюда поставим ссылку Google Maps.
-    */
 
 
     if (mapButton) {
@@ -1160,7 +1283,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         swipeDistance
                     ) < 50
                 ) {
+
                     return;
+
                 }
 
 
@@ -1187,7 +1312,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ==================================================
        PRELOAD GALLERY IMAGES
-================================================== */
+    ================================================== */
 
     galleryImages.forEach(
         imagePath => {
@@ -1204,10 +1329,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ==================================================
        CONSOLE
-================================================== */
+    ================================================== */
 
     console.log(
         "Birthday website initialized successfully."
     );
+
+    console.log(
+        "Telegram RSVP integration is active."
+    );
+
 
 });
