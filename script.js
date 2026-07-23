@@ -1,668 +1,1213 @@
-/*==================================================
-                EVENT
-==================================================*/
+/* ==================================================
+   WAIT FOR DOM
+================================================== */
 
-const EVENT = {
+document.addEventListener("DOMContentLoaded", () => {
 
-    date: "2026-08-08T18:00:00",
 
-    title: "День рождения Лианы",
+    /* ==================================================
+       LOADER
+    ================================================== */
 
-    owner: "Лиана"
+    const loader = document.getElementById("loader");
 
-};
+    window.addEventListener("load", () => {
 
-/*==================================================
-                HELPERS
-==================================================*/
+        setTimeout(() => {
 
-const $ = selector => document.querySelector(selector);
+            if (loader) {
+                loader.classList.add("hidden");
+            }
 
-const $$ = selector => document.querySelectorAll(selector);
+        }, 700);
 
-const body = document.body;
+    });
 
-function pad(number){
 
-    return String(number).padStart(2,"0");
+    /* ==================================================
+       MOBILE MENU
+    ================================================== */
 
-}
+    const menuToggle =
+        document.getElementById("menuToggle");
 
-/*==================================================
-            PRELOADER
-==================================================*/
+    const navigation =
+        document.querySelector(".navigation");
 
-window.addEventListener("load",()=>{
+    if (menuToggle && navigation) {
 
-    const loader=$(".preloader");
+        menuToggle.addEventListener(
+            "click",
+            () => {
 
-    if(!loader) return;
+                menuToggle.classList.toggle("active");
 
-    setTimeout(()=>{
+                navigation.classList.toggle("active");
 
-        loader.classList.add("hide");
+                document.body.classList.toggle(
+                    "no-scroll"
+                );
 
-    },900);
+            }
+        );
 
-    setTimeout(()=>{
 
-        loader.remove();
+        const navigationLinks =
+            navigation.querySelectorAll("a");
 
-    },1600);
+        navigationLinks.forEach(link => {
 
-});
+            link.addEventListener(
+                "click",
+                () => {
 
-/*==================================================
-            HERO BUTTON
-==================================================*/
+                    menuToggle.classList.remove(
+                        "active"
+                    );
 
-const heroButton=$("#openInvitation");
+                    navigation.classList.remove(
+                        "active"
+                    );
 
-const welcome=$("#welcome");
+                    document.body.classList.remove(
+                        "no-scroll"
+                    );
 
-if(heroButton && welcome){
-
-    heroButton.addEventListener("click",()=>{
-
-        welcome.scrollIntoView({
-
-            behavior:"smooth"
+                }
+            );
 
         });
 
-    });
+    }
 
-}
 
-/*==================================================
-            REVEAL
-==================================================*/
+    /* ==================================================
+       HEADER ON SCROLL
+    ================================================== */
 
-const hiddenElements=$$(".section");
+    const header =
+        document.querySelector(".header");
 
-hiddenElements.forEach(el=>{
+    function updateHeader() {
 
-    el.classList.add("hidden");
+        if (!header) return;
 
-});
+        if (window.scrollY > 50) {
 
-const observer=new IntersectionObserver(entries=>{
+            header.classList.add("scrolled");
 
-    entries.forEach(entry=>{
+        } else {
 
-        if(entry.isIntersecting){
-
-            entry.target.classList.add("show");
+            header.classList.remove("scrolled");
 
         }
 
-    });
+    }
 
-},{
+    window.addEventListener(
+        "scroll",
+        updateHeader
+    );
 
-    threshold:.15
+    updateHeader();
 
-});
 
-hiddenElements.forEach(el=>{
+    /* ==================================================
+       SMOOTH SCROLL
+    ================================================== */
 
-    observer.observe(el);
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(link => {
 
-});
+            link.addEventListener(
+                "click",
+                function (event) {
 
-/*==================================================
-            PARALLAX
-==================================================*/
+                    const targetId =
+                        this.getAttribute("href");
 
-const hero=$(".hero");
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+                        return;
+                    }
 
-window.addEventListener("mousemove",(e)=>{
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
 
-    if(!hero) return;
+                    if (!target) return;
 
-    const x=(e.clientX/window.innerWidth-.5)*20;
+                    event.preventDefault();
 
-    const y=(e.clientY/window.innerHeight-.5)*20;
+                    const headerHeight =
+                        header
+                            ? header.offsetHeight
+                            : 0;
 
-    hero.style.backgroundPosition=
+                    const targetPosition =
+                        target.offsetTop -
+                        headerHeight;
 
-    `${50+x}% ${50+y}%`;
+                    window.scrollTo({
 
-});
+                        top:
+                            targetPosition,
 
-/*==================================================
-            NEXT PART
-                COUNTDOWN
-==================================================*/
-/*==================================================
-                COUNTDOWN
-==================================================*/
+                        behavior:
+                            "smooth"
 
-const countdown = {
+                    });
 
-    target: new Date(EVENT.date).getTime(),
+                }
+            );
 
-    days: $("#days"),
+        });
 
-    hours: $("#hours"),
 
-    minutes: $("#minutes"),
+    /* ==================================================
+       COUNTDOWN
+    ================================================== */
 
-    seconds: $("#seconds")
+    const daysElement =
+        document.getElementById("days");
 
-};
+    const hoursElement =
+        document.getElementById("hours");
 
-function updateCountdown(){
+    const minutesElement =
+        document.getElementById("minutes");
 
-    const now = Date.now();
+    const secondsElement =
+        document.getElementById("seconds");
 
-    const distance = countdown.target - now;
 
-    if(distance <= 0){
+    /*
+        ВАЖНО:
 
-        countdown.days.textContent = "00";
+        Здесь указана дата:
 
-        countdown.hours.textContent = "00";
+        8 августа 2026 года
 
-        countdown.minutes.textContent = "00";
+        Время:
+        18:00
 
-        countdown.seconds.textContent = "00";
+        Если праздник будет в другое время,
+        потом изменим эту строку.
+    */
 
-        clearInterval(countdownInterval);
+    const birthdayDate =
+        new Date(
+            "2026-08-08T18:00:00+05:00"
+        );
 
-        return;
+
+    function addZero(number) {
+
+        return String(number)
+            .padStart(2, "0");
 
     }
 
-    const days = Math.floor(
 
-        distance /
+    function updateCountdown() {
 
-        (1000*60*60*24)
+        const now =
+            new Date();
 
-    );
+        const difference =
+            birthdayDate.getTime() -
+            now.getTime();
 
-    const hours = Math.floor(
 
-        distance %
+        if (difference <= 0) {
 
-        (1000*60*60*24)
+            if (daysElement)
+                daysElement.textContent = "00";
 
-        /
+            if (hoursElement)
+                hoursElement.textContent = "00";
 
-        (1000*60*60)
+            if (minutesElement)
+                minutesElement.textContent = "00";
 
-    );
+            if (secondsElement)
+                secondsElement.textContent = "00";
 
-    const minutes = Math.floor(
+            return;
 
-        distance %
+        }
 
-        (1000*60*60)
 
-        /
+        const days =
+            Math.floor(
+                difference /
+                (1000 * 60 * 60 * 24)
+            );
 
-        (1000*60)
 
-    );
+        const hours =
+            Math.floor(
+                (
+                    difference /
+                    (1000 * 60 * 60)
+                ) % 24
+            );
 
-    const seconds = Math.floor(
 
-        distance %
+        const minutes =
+            Math.floor(
+                (
+                    difference /
+                    (1000 * 60)
+                ) % 60
+            );
 
-        (1000*60)
 
-        /
+        const seconds =
+            Math.floor(
+                (
+                    difference /
+                    1000
+                ) % 60
+            );
 
+
+        if (daysElement) {
+
+            daysElement.textContent =
+                addZero(days);
+
+        }
+
+
+        if (hoursElement) {
+
+            hoursElement.textContent =
+                addZero(hours);
+
+        }
+
+
+        if (minutesElement) {
+
+            minutesElement.textContent =
+                addZero(minutes);
+
+        }
+
+
+        if (secondsElement) {
+
+            secondsElement.textContent =
+                addZero(seconds);
+
+        }
+
+    }
+
+
+    updateCountdown();
+
+    setInterval(
+        updateCountdown,
         1000
-
     );
 
-    animateNumber(
 
-        countdown.days,
+    /* ==================================================
+       SCROLL REVEAL
+    ================================================== */
 
-        pad(days)
+    const revealElements =
+        document.querySelectorAll(
+            ".reveal"
+        );
 
+
+    const revealObserver =
+        new IntersectionObserver(
+
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target
+                                .classList
+                                .add("show");
+
+                            revealObserver
+                                .unobserve(
+                                    entry.target
+                                );
+
+                        }
+
+                    }
+                );
+
+            },
+
+            {
+                threshold: 0.12
+            }
+
+        );
+
+
+    revealElements.forEach(
+        element => {
+
+            revealObserver.observe(
+                element
+            );
+
+        }
     );
 
-    animateNumber(
 
-        countdown.hours,
+    /* ==================================================
+       GALLERY
+    ================================================== */
 
-        pad(hours)
+    const galleryItems =
+        document.querySelectorAll(
+            ".gallery-item"
+        );
 
-    );
 
-    animateNumber(
+    const lightbox =
+        document.getElementById(
+            "lightbox"
+        );
 
-        countdown.minutes,
 
-        pad(minutes)
+    const lightboxImage =
+        document.getElementById(
+            "lightboxImage"
+        );
 
-    );
 
-    animateNumber(
+    const lightboxClose =
+        document.getElementById(
+            "lightboxClose"
+        );
 
-        countdown.seconds,
 
-        pad(seconds)
+    const lightboxPrev =
+        document.getElementById(
+            "lightboxPrev"
+        );
 
-    );
 
-}
+    const lightboxNext =
+        document.getElementById(
+            "lightboxNext"
+        );
 
-function animateNumber(element,value){
 
-    if(!element) return;
+    let currentImageIndex = 0;
 
-    if(element.textContent===value) return;
 
-    element.textContent=value;
+    /*
+        Здесь указываем все 4 фотографии.
 
-    element.classList.remove("tick");
+        Формат:
 
-    void element.offsetWidth;
+        photo-1.jpeg
+        photo-2.jpeg
+        photo-3.jpeg
+        photo-4.jpeg
+    */
 
-    element.classList.add("tick");
+    const galleryImages = [
 
-}
+        "photo-1.jpeg",
 
-updateCountdown();
+        "photo-2.jpeg",
 
-const countdownInterval =
+        "photo-3.jpeg",
 
-setInterval(
+        "photo-4.jpeg"
 
-    updateCountdown,
+    ];
 
-    1000
 
-);
+    function openLightbox(index) {
 
-/*==================================================
-            HERO FADE
-==================================================*/
-
-window.addEventListener("scroll",()=>{
-
-    const scroll = window.scrollY;
-
-    if(!hero) return;
-
-    hero.style.opacity =
-
-        1 - scroll/900;
-
-});
-
-/*==================================================
-            NEXT PART
-                GALLERY
-==================================================*/
-/*==================================================
-                GALLERY
-==================================================*/
-
-const galleryImages = $$(".gallery img");
-
-const lightbox = document.createElement("div");
-lightbox.className = "lightbox";
-
-const lightboxImage = document.createElement("img");
-lightboxImage.className = "lightbox-image";
-
-const lightboxClose = document.createElement("button");
-lightboxClose.className = "lightbox-close";
-lightboxClose.innerHTML = "&times;";
-
-lightbox.appendChild(lightboxImage);
-lightbox.appendChild(lightboxClose);
-
-body.appendChild(lightbox);
-
-galleryImages.forEach(image => {
-
-    image.addEventListener("click", () => {
-
-        lightboxImage.src = image.src;
-
-        lightbox.classList.add("active");
-
-        body.style.overflow = "hidden";
-
-    });
-
-});
-
-function closeLightbox(){
-
-    lightbox.classList.remove("active");
-
-    body.style.overflow = "";
-
-}
-
-lightboxClose.addEventListener(
-
-    "click",
-
-    closeLightbox
-
-);
-
-lightbox.addEventListener("click",(event)=>{
-
-    if(event.target===lightbox){
-
-        closeLightbox();
-
-    }
-
-});
-
-document.addEventListener("keydown",(event)=>{
-
-    if(
-
-        event.key==="Escape" &&
-
-        lightbox.classList.contains("active")
-
-    ){
-
-        closeLightbox();
-
-    }
-
-});
-
-/*==================================================
-            IMAGE EFFECT
-==================================================*/
-
-galleryImages.forEach(image=>{
-
-    image.addEventListener("mouseenter",()=>{
-
-        image.style.transform="scale(1.04)";
-
-    });
-
-    image.addEventListener("mouseleave",()=>{
-
-        image.style.transform="";
-
-    });
-
-});
-
-/*==================================================
-                NEXT PART
-                    RSVP
-==================================================*/
-/*==================================================
-                    RSVP
-==================================================*/
-
-const rsvpForm = $("#rsvpForm");
-
-const answerButtons = $$(".answers button");
-
-let selectedAnswer = "";
-
-answerButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        answerButtons.forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
-
-        button.classList.add("active");
-
-        selectedAnswer =
-
-            button.dataset.answer;
-
-    });
-
-});
-
-/*==================================================
-            SUCCESS MODAL
-==================================================*/
-
-let successModal = null;
-
-function createSuccessModal(){
-
-    if(successModal) return;
-
-    successModal = document.createElement("div");
-
-    successModal.className = "success-modal";
-
-    successModal.innerHTML = `
-
-        <div class="success-box">
-
-            <h2>Спасибо ❤️</h2>
-
-            <p>
-
-                Твой ответ успешно сохранён.
-
-            </p>
-
-            <button>
-
-                Закрыть
-
-            </button>
-
-        </div>
-
-    `;
-
-    body.appendChild(successModal);
-
-    successModal
-
-        .querySelector("button")
-
-        .addEventListener("click",()=>{
-
-            successModal.classList.remove("active");
-
-        });
-
-}
-
-createSuccessModal();
-
-/*==================================================
-            RSVP SUBMIT
-==================================================*/
-
-if(rsvpForm){
-
-    rsvpForm.addEventListener("submit",(event)=>{
-
-        event.preventDefault();
-
-        const name =
-
-            rsvpForm
-
-            .querySelector("input")
-
-            .value
-
-            .trim();
-
-        const comment =
-
-            rsvpForm
-
-            .querySelector("textarea")
-
-            .value
-
-            .trim();
-
-        if(name.length < 2){
-
-            alert("Введите имя.");
-
+        if (
+            !lightbox ||
+            !lightboxImage
+        ) {
             return;
+        }
+
+
+        currentImageIndex =
+            index;
+
+
+        lightboxImage.src =
+            galleryImages[
+                currentImageIndex
+            ];
+
+
+        lightbox.classList.add(
+            "active"
+        );
+
+
+        document.body.classList.add(
+            "no-scroll"
+        );
+
+    }
+
+
+    function closeLightbox() {
+
+        if (!lightbox) {
+            return;
+        }
+
+
+        lightbox.classList.remove(
+            "active"
+        );
+
+
+        document.body.classList.remove(
+            "no-scroll"
+        );
+
+
+        setTimeout(
+            () => {
+
+                if (lightboxImage) {
+
+                    lightboxImage.src =
+                        "";
+
+                }
+
+            },
+
+            400
+        );
+
+    }
+
+
+    function showPreviousImage() {
+
+        currentImageIndex--;
+
+        if (
+            currentImageIndex < 0
+        ) {
+
+            currentImageIndex =
+                galleryImages.length - 1;
 
         }
 
-        if(selectedAnswer===""){
 
-            alert("Выберите вариант ответа.");
+        if (lightboxImage) {
 
-            return;
+            lightboxImage.src =
+                galleryImages[
+                    currentImageIndex
+                ];
 
         }
 
-        const guest = {
+    }
 
-            name,
 
-            answer:selectedAnswer,
+    function showNextImage() {
 
-            comment,
+        currentImageIndex++;
 
-            created:new Date()
+        if (
+            currentImageIndex >=
+            galleryImages.length
+        ) {
 
-        };
+            currentImageIndex = 0;
 
-       async function sendToTelegram(data) {
+        }
 
-    try {
 
-        const response = await fetch("https://birthday-psi-rosy.vercel.app/api/telegram", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+        if (lightboxImage) {
+
+            lightboxImage.src =
+                galleryImages[
+                    currentImageIndex
+                ];
+
+        }
+
+    }
+
+
+    galleryItems.forEach(
+        (item, index) => {
+
+            item.addEventListener(
+                "click",
+                () => {
+
+                    openLightbox(
+                        index
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    if (lightboxClose) {
+
+        lightboxClose.addEventListener(
+            "click",
+            closeLightbox
+        );
+
+    }
+
+
+    if (lightboxPrev) {
+
+        lightboxPrev.addEventListener(
+            "click",
+            showPreviousImage
+        );
+
+    }
+
+
+    if (lightboxNext) {
+
+        lightboxNext.addEventListener(
+            "click",
+            showNextImage
+        );
+
+    }
+
+
+    if (lightbox) {
+
+        lightbox.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target ===
+                    lightbox
+                ) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       LIGHTBOX KEYBOARD
+    ================================================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                !lightbox ||
+                !lightbox.classList.contains(
+                    "active"
+                )
+            ) {
+                return;
+            }
+
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                closeLightbox();
+
+            }
+
+
+            if (
+                event.key ===
+                "ArrowLeft"
+            ) {
+
+                showPreviousImage();
+
+            }
+
+
+            if (
+                event.key ===
+                "ArrowRight"
+            ) {
+
+                showNextImage();
+
+            }
+
+        }
+    );
+
+
+    /* ==================================================
+       RSVP ANSWERS
+    ================================================== */
+
+    const answerButtons =
+        document.querySelectorAll(
+            ".answer-button"
+        );
+
+
+    const guestAnswer =
+        document.getElementById(
+            "guestAnswer"
+        );
+
+
+    answerButtons.forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+
+                    answerButtons.forEach(
+                        item => {
+
+                            item.classList
+                                .remove(
+                                    "active"
+                                );
+
+                        }
+                    );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    const answer =
+                        button.dataset.answer;
+
+
+                    if (guestAnswer) {
+
+                        guestAnswer.value =
+                            answer;
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /* ==================================================
+       RSVP FORM
+    ================================================== */
+
+    const rsvpForm =
+        document.getElementById(
+            "rsvpForm"
+        );
+
+
+    const formStatus =
+        document.getElementById(
+            "formStatus"
+        );
+
+
+    const successModal =
+        document.getElementById(
+            "successModal"
+        );
+
+
+    const successMessage =
+        document.getElementById(
+            "successMessage"
+        );
+
+
+    const successClose =
+        document.getElementById(
+            "successClose"
+        );
+
+
+    const successButton =
+        document.getElementById(
+            "successButton"
+        );
+
+
+    /*
+        ВАЖНО:
+
+        Сейчас форма работает визуально.
+
+        Ниже будет подключён
+        Telegram Backend / API.
+
+        Когда мы подключим Telegram,
+        здесь будет реальная отправка.
+    */
+
+
+    if (rsvpForm) {
+
+        rsvpForm.addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                const nameInput =
+                    document.getElementById(
+                        "guestName"
+                    );
+
+
+                const messageInput =
+                    document.getElementById(
+                        "guestMessage"
+                    );
+
+
+                const name =
+                    nameInput
+                        ? nameInput.value.trim()
+                        : "";
+
+
+                const answer =
+                    guestAnswer
+                        ? guestAnswer.value
+                        : "";
+
+
+                const message =
+                    messageInput
+                        ? messageInput.value.trim()
+                        : "";
+
+
+                if (!name) {
+
+                    if (formStatus) {
+
+                        formStatus.textContent =
+                            "Пожалуйста, введи своё имя.";
+
+                    }
+
+                    return;
+
+                }
+
+
+                if (!answer) {
+
+                    if (formStatus) {
+
+                        formStatus.textContent =
+                            "Пожалуйста, выбери вариант ответа.";
+
+                    }
+
+                    return;
+
+                }
+
+
+                if (formStatus) {
+
+                    formStatus.textContent =
+                        "Отправляем ответ...";
+
+                }
+
+
+                /*
+                    ПОКА ЧТО ИМИТАЦИЯ ОТПРАВКИ.
+
+                    Следующим этапом
+                    подключим сюда Telegram.
+                */
+
+
+                await new Promise(
+                    resolve =>
+                        setTimeout(
+                            resolve,
+                            700
+                        )
+                );
+
+
+                if (successMessage) {
+
+                    successMessage.textContent =
+                        `Спасибо, ${name}! Твой ответ «${answer}» отправлен.`;
+
+                }
+
+
+                if (successModal) {
+
+                    successModal.classList.add(
+                        "active"
+                    );
+
+                }
+
+
+                document.body.classList.add(
+                    "no-scroll"
+                );
+
+
+                rsvpForm.reset();
+
+
+                answerButtons.forEach(
+                    button => {
+
+                        button.classList
+                            .remove(
+                                "active"
+                            );
+
+                    }
+                );
+
+
+                if (guestAnswer) {
+
+                    guestAnswer.value =
+                        "";
+
+                }
+
+
+                if (formStatus) {
+
+                    formStatus.textContent =
+                        "";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       SUCCESS MODAL CLOSE
+    ================================================== */
+
+    function closeSuccessModal() {
+
+        if (!successModal) {
+            return;
+        }
+
+
+        successModal.classList.remove(
+            "active"
+        );
+
+
+        document.body.classList.remove(
+            "no-scroll"
+        );
+
+    }
+
+
+    if (successClose) {
+
+        successClose.addEventListener(
+            "click",
+            closeSuccessModal
+        );
+
+    }
+
+
+    if (successButton) {
+
+        successButton.addEventListener(
+            "click",
+            closeSuccessModal
+        );
+
+    }
+
+
+    if (successModal) {
+
+        successModal.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target ===
+                    successModal
+                ) {
+
+                    closeSuccessModal();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       SCROLL TOP
+    ================================================== */
+
+    const scrollTop =
+        document.getElementById(
+            "scrollTop"
+        );
+
+
+    function updateScrollTop() {
+
+        if (!scrollTop) {
+            return;
+        }
+
+
+        if (
+            window.scrollY > 500
+        ) {
+
+            scrollTop.classList.add(
+                "show"
+            );
+
+        } else {
+
+            scrollTop.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateScrollTop
+    );
+
+
+    updateScrollTop();
+
+
+    if (scrollTop) {
+
+        scrollTop.addEventListener(
+            "click",
+            () => {
+
+                window.scrollTo({
+
+                    top: 0,
+
+                    behavior: "smooth"
+
+                });
+
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       MAP BUTTON
+    ================================================== */
+
+    const mapButton =
+        document.getElementById(
+            "mapButton"
+        );
+
+
+    /*
+        Пока адрес неизвестен.
+
+        Когда ты скажешь точное место,
+        сюда поставим ссылку Google Maps.
+    */
+
+
+    if (mapButton) {
+
+        mapButton.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    mapButton.getAttribute(
+                        "href"
+                    ) === "#"
+                ) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "Ссылка на карту появится после выбора места проведения."
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       TOUCH SWIPE FOR LIGHTBOX
+    ================================================== */
+
+    let touchStartX = 0;
+
+    let touchEndX = 0;
+
+
+    if (lightbox) {
+
+        lightbox.addEventListener(
+            "touchstart",
+            event => {
+
+                touchStartX =
+                    event.changedTouches[0]
+                        .screenX;
+
             },
-            body: JSON.stringify(data)
-        });
+            {
+                passive: true
+            }
+        );
 
-        const result = await response.json();
 
-        console.log(result);
+        lightbox.addEventListener(
+            "touchend",
+            event => {
 
-    } catch (error) {
-        console.error(error);
-    }
+                touchEndX =
+                    event.changedTouches[0]
+                        .screenX;
 
-}
 
-/*==================================================
-            SCROLL TO TOP
-==================================================*/
+                const swipeDistance =
+                    touchEndX -
+                    touchStartX;
 
-const topButton = document.createElement("button");
 
-topButton.className = "scroll-top";
+                if (
+                    Math.abs(
+                        swipeDistance
+                    ) < 50
+                ) {
+                    return;
+                }
 
-topButton.innerHTML = "↑";
 
-body.appendChild(topButton);
+                if (
+                    swipeDistance > 0
+                ) {
 
-window.addEventListener("scroll",()=>{
+                    showPreviousImage();
 
-    if(window.scrollY > 500){
+                } else {
 
-        topButton.classList.add("show");
+                    showNextImage();
 
-    }
+                }
 
-    else{
-
-        topButton.classList.remove("show");
-
-    }
-
-});
-
-topButton.addEventListener("click",()=>{
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
-
-});
-      /*==============================
-    MAGIC PARTICLES
-==============================*/
-
-const particles = document.querySelector(".particles");
-
-for(let i=0;i<80;i++){
-
-    const p=document.createElement("span");
-
-    p.style.left=Math.random()*100+"%";
-
-    p.style.animationDuration=8+Math.random()*10+"s";
-
-    p.style.animationDelay=Math.random()*8+"s";
-
-    particles.appendChild(p);
-
-}
-
-/*==================================================
-                NEXT PART
-            TELEGRAM API
-==================================================*/
-sendToTelegram(guest);
-
-successModal.classList.add("active");
-
-rsvpForm.reset();
-
-selectedAnswer = "";
-
-answerButtons.forEach(btn=>{
-
-    btn.classList.remove("active");
-
-});
-
-});
-
-}
-async function sendToTelegram(data) {
-
-    try {
-
-        const response = await fetch("https://birthday-psi-rosy.vercel.app/api/telegram", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
             },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-
-        console.log(result);
-
-    } catch (error) {
-
-        console.error(error);
+            {
+                passive: true
+            }
+        );
 
     }
 
-}
+
+    /* ==================================================
+       PRELOAD GALLERY IMAGES
+================================================== */
+
+    galleryImages.forEach(
+        imagePath => {
+
+            const image =
+                new Image();
+
+            image.src =
+                imagePath;
+
+        }
+    );
+
+
+    /* ==================================================
+       CONSOLE
+================================================== */
+
+    console.log(
+        "Birthday website initialized successfully."
+    );
+
+});
