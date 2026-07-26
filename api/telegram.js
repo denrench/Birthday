@@ -32,7 +32,7 @@ ${message || "Гость ничего не написал"}
         `;
 
         const telegramResponse = await fetch(
-            `https://api.telegram.org/bot${process.env.8378157846:AAGZV13YRUhlGIRqGqPaa6h8j2bOm9N1UuQ}/sendMessage`,
+            `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage`,
             {
                 method: "POST",
 
@@ -51,6 +51,7 @@ ${message || "Гость ничего не написал"}
             await telegramResponse.json();
 
         if (!telegramResponse.ok) {
+
             console.error(
                 "Telegram error:",
                 telegramData
