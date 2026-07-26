@@ -1,5 +1,5 @@
 /* ==================================================
-   WAIT FOR DOM
+   BIRTHDAY WEBSITE — SCRIPT.JS
 ================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,8 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
        LOADER
     ================================================== */
 
-    const loader =
-        document.getElementById("loader");
+    const loader = document.getElementById("loader");
 
     window.addEventListener("load", () => {
 
@@ -20,9 +19,40 @@ document.addEventListener("DOMContentLoaded", () => {
                 loader.classList.add("hidden");
             }
 
-        }, 700);
+        }, 1200);
 
     });
+
+
+    /* ==================================================
+       HEADER — SCROLL
+    ================================================== */
+
+    const header = document.getElementById("header");
+
+    function handleHeaderScroll() {
+
+        if (!header) return;
+
+        if (window.scrollY > 50) {
+
+            header.classList.add("scrolled");
+
+        } else {
+
+            header.classList.remove("scrolled");
+
+        }
+
+    }
+
+    window.addEventListener(
+        "scroll",
+        handleHeaderScroll,
+        { passive: true }
+    );
+
+    handleHeaderScroll();
 
 
     /* ==================================================
@@ -35,7 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const navigation =
         document.querySelector(".navigation");
 
-    if (menuToggle && navigation) {
+    if (
+        menuToggle &&
+        navigation
+    ) {
 
         menuToggle.addEventListener(
             "click",
@@ -59,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const navigationLinks =
             navigation.querySelectorAll("a");
+
 
         navigationLinks.forEach(link => {
 
@@ -87,101 +121,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       HEADER ON SCROLL
-    ================================================== */
-
-    const header =
-        document.querySelector(".header");
-
-    function updateHeader() {
-
-        if (!header) return;
-
-        if (window.scrollY > 50) {
-
-            header.classList.add(
-                "scrolled"
-            );
-
-        } else {
-
-            header.classList.remove(
-                "scrolled"
-            );
-
-        }
-
-    }
-
-    window.addEventListener(
-        "scroll",
-        updateHeader
-    );
-
-    updateHeader();
-
-
-    /* ==================================================
-       SMOOTH SCROLL
-    ================================================== */
-
-    document
-        .querySelectorAll('a[href^="#"]')
-        .forEach(link => {
-
-            link.addEventListener(
-                "click",
-                function (event) {
-
-                    const targetId =
-                        this.getAttribute(
-                            "href"
-                        );
-
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-                        return;
-                    }
-
-                    const target =
-                        document.querySelector(
-                            targetId
-                        );
-
-                    if (!target) return;
-
-                    event.preventDefault();
-
-                    const headerHeight =
-                        header
-                            ? header.offsetHeight
-                            : 0;
-
-                    const targetPosition =
-                        target.offsetTop -
-                        headerHeight;
-
-                    window.scrollTo({
-
-                        top:
-                            targetPosition,
-
-                        behavior:
-                            "smooth"
-
-                    });
-
-                }
-            );
-
-        });
-
-
-    /* ==================================================
        COUNTDOWN
+       08.08.2026 — 19:00
     ================================================== */
+
+    const targetDate =
+        new Date(
+            "August 8, 2026 19:00:00"
+        ).getTime();
+
 
     const daysElement =
         document.getElementById("days");
@@ -196,23 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("seconds");
 
 
-    /*
-        Дата праздника:
-
-        08.08.2026
-        18:00
-
-        Если время изменится,
-        поменяем эту строку.
-    */
-
-    const birthdayDate =
-        new Date(
-            "2026-08-08T18:00:00+05:00"
-        );
-
-
-    function addZero(number) {
+    function formatNumber(number) {
 
         return String(number)
             .padStart(2, "0");
@@ -223,30 +155,30 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateCountdown() {
 
         const now =
-            new Date();
-
-        const difference =
-            birthdayDate.getTime() -
-            now.getTime();
+            new Date().getTime();
 
 
-        if (difference <= 0) {
+        const distance =
+            targetDate - now;
 
-            if (daysElement)
-                daysElement.textContent =
-                    "00";
 
-            if (hoursElement)
-                hoursElement.textContent =
-                    "00";
+        if (distance <= 0) {
 
-            if (minutesElement)
-                minutesElement.textContent =
-                    "00";
+            if (daysElement) {
+                daysElement.textContent = "00";
+            }
 
-            if (secondsElement)
-                secondsElement.textContent =
-                    "00";
+            if (hoursElement) {
+                hoursElement.textContent = "00";
+            }
+
+            if (minutesElement) {
+                minutesElement.textContent = "00";
+            }
+
+            if (secondsElement) {
+                secondsElement.textContent = "00";
+            }
 
             return;
 
@@ -255,42 +187,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const days =
             Math.floor(
-                difference /
+                distance /
                 (1000 * 60 * 60 * 24)
             );
 
 
         const hours =
             Math.floor(
-                (
-                    difference /
-                    (1000 * 60 * 60)
-                ) % 24
+                (distance %
+                    (1000 * 60 * 60 * 24)
+                ) /
+                (1000 * 60 * 60)
             );
 
 
         const minutes =
             Math.floor(
-                (
-                    difference /
-                    (1000 * 60)
-                ) % 60
+                (distance %
+                    (1000 * 60 * 60)
+                ) /
+                (1000 * 60)
             );
 
 
         const seconds =
             Math.floor(
-                (
-                    difference /
-                    1000
-                ) % 60
+                (distance %
+                    (1000 * 60)
+                ) /
+                1000
             );
 
 
         if (daysElement) {
 
             daysElement.textContent =
-                addZero(days);
+                formatNumber(days);
 
         }
 
@@ -298,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (hoursElement) {
 
             hoursElement.textContent =
-                addZero(hours);
+                formatNumber(hours);
 
         }
 
@@ -306,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (minutesElement) {
 
             minutesElement.textContent =
-                addZero(minutes);
+                formatNumber(minutes);
 
         }
 
@@ -314,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (secondsElement) {
 
             secondsElement.textContent =
-                addZero(seconds);
+                formatNumber(seconds);
 
         }
 
@@ -323,10 +255,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateCountdown();
 
-    setInterval(
-        updateCountdown,
-        1000
-    );
+
+    const countdownInterval =
+        setInterval(
+            updateCountdown,
+            1000
+        );
 
 
     /* ==================================================
@@ -339,71 +273,46 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    if (
-        "IntersectionObserver"
-        in window
-    ) {
+    const revealObserver =
+        new IntersectionObserver(
+            (entries, observer) => {
 
-        const revealObserver =
-            new IntersectionObserver(
+                entries.forEach(
+                    entry => {
 
-                entries => {
+                        if (
+                            entry.isIntersecting
+                        ) {
 
-                    entries.forEach(
-                        entry => {
+                            entry.target.classList.add(
+                                "show"
+                            );
 
-                            if (
-                                entry.isIntersecting
-                            ) {
-
+                            observer.unobserve(
                                 entry.target
-                                    .classList
-                                    .add(
-                                        "show"
-                                    );
-
-                                revealObserver
-                                    .unobserve(
-                                        entry.target
-                                    );
-
-                            }
+                            );
 
                         }
-                    );
 
-                },
+                    }
+                );
 
-                {
-                    threshold: 0.12
-                }
+            },
+            {
+                threshold: 0.12
+            }
+        );
 
+
+    revealElements.forEach(
+        element => {
+
+            revealObserver.observe(
+                element
             );
 
-
-        revealElements.forEach(
-            element => {
-
-                revealObserver.observe(
-                    element
-                );
-
-            }
-        );
-
-    } else {
-
-        revealElements.forEach(
-            element => {
-
-                element.classList.add(
-                    "show"
-                );
-
-            }
-        );
-
-    }
+        }
+    );
 
 
     /* ==================================================
@@ -449,24 +358,31 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentImageIndex = 0;
 
 
-    const galleryImages = [
+    const galleryImages =
+        Array.from(
+            galleryItems
+        ).map(
+            item => {
 
-        "photo-1.jpeg",
+                const image =
+                    item.querySelector(
+                        "img"
+                    );
 
-        "photo-2.jpeg",
+                return image
+                    ? image.src
+                    : "";
 
-        "photo-3.jpeg",
-
-        "photo-4.jpeg"
-
-    ];
+            }
+        );
 
 
     function openLightbox(index) {
 
         if (
             !lightbox ||
-            !lightboxImage
+            !lightboxImage ||
+            !galleryImages.length
         ) {
             return;
         }
@@ -480,6 +396,12 @@ document.addEventListener("DOMContentLoaded", () => {
             galleryImages[
                 currentImageIndex
             ];
+
+
+        lightboxImage.alt =
+            `Фото ${
+                currentImageIndex + 1
+            }`;
 
 
         lightbox.classList.add(
@@ -496,9 +418,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function closeLightbox() {
 
-        if (!lightbox) {
-            return;
-        }
+        if (!lightbox) return;
 
 
         lightbox.classList.remove(
@@ -509,18 +429,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.remove(
             "no-scroll"
         );
-
-
-        setTimeout(() => {
-
-            if (lightboxImage) {
-
-                lightboxImage.src =
-                    "";
-
-            }
-
-        }, 400);
 
     }
 
@@ -647,7 +555,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       LIGHTBOX KEYBOARD
+       LIGHTBOX — KEYBOARD
     ================================================== */
 
     document.addEventListener(
@@ -698,7 +606,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       RSVP ANSWERS
+       RSVP — ANSWER BUTTONS
     ================================================== */
 
     const answerButtons =
@@ -719,6 +627,7 @@ document.addEventListener("DOMContentLoaded", () => {
             button.addEventListener(
                 "click",
                 () => {
+
 
                     answerButtons.forEach(
                         item => {
@@ -755,7 +664,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       RSVP FORM + TELEGRAM
+       RSVP FORM
     ================================================== */
 
     const rsvpForm =
@@ -776,12 +685,6 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    const successMessage =
-        document.getElementById(
-            "successMessage"
-        );
-
-
     const successClose =
         document.getElementById(
             "successClose"
@@ -794,286 +697,60 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    if (rsvpForm) {
+    const successMessage =
+        document.getElementById(
+            "successMessage"
+        );
 
-        rsvpForm.addEventListener(
-            "submit",
-            async event => {
 
-                event.preventDefault();
+    function openSuccessModal(
+        answer
+    ) {
 
+        if (!successModal) {
+            return;
+        }
 
-                const nameInput =
-                    document.getElementById(
-                        "guestName"
-                    );
 
+        if (successMessage) {
 
-                const messageInput =
-                    document.getElementById(
-                        "guestMessage"
-                    );
+            if (
+                answer ===
+                "Приду"
+            ) {
 
+                successMessage.textContent =
+                    "Отлично! Буду ждать тебя на празднике 8 августа.";
 
-                const name =
-                    nameInput
-                        ? nameInput.value.trim()
-                        : "";
+            } else if (
+                answer ===
+                "Возможно"
+            ) {
 
+                successMessage.textContent =
+                    "Хорошо! Надеюсь, у тебя получится прийти.";
 
-                const answer =
-                    guestAnswer
-                        ? guestAnswer.value
-                        : "";
+            } else {
 
-
-                const message =
-                    messageInput
-                        ? messageInput.value.trim()
-                        : "";
-
-
-                /* ------------------------------
-                   VALIDATION
-                ------------------------------ */
-
-                if (!name) {
-
-                    if (formStatus) {
-
-                        formStatus.textContent =
-                            "Пожалуйста, введи своё имя.";
-
-                    }
-
-                    if (nameInput) {
-
-                        nameInput.focus();
-
-                    }
-
-                    return;
-
-                }
-
-
-                if (!answer) {
-
-                    if (formStatus) {
-
-                        formStatus.textContent =
-                            "Пожалуйста, выбери вариант ответа.";
-
-                    }
-
-                    return;
-
-                }
-
-
-                /* ------------------------------
-                   LOADING
-                ------------------------------ */
-
-                const submitButton =
-                    rsvpForm.querySelector(
-                        'button[type="submit"]'
-                    );
-
-
-                if (submitButton) {
-
-                    submitButton.disabled =
-                        true;
-
-                    submitButton.style.opacity =
-                        "0.6";
-
-                    submitButton.style.pointerEvents =
-                        "none";
-
-                }
-
-
-                if (formStatus) {
-
-                    formStatus.textContent =
-                        "Отправляем ответ...";
-
-                }
-
-
-                try {
-
-                    /* --------------------------
-                       SEND TO VERCEL API
-                    -------------------------- */
-
-                    const response =
-                        await fetch(
-                            "/api/telegram",
-                            {
-
-                                method:
-                                    "POST",
-
-                                headers: {
-
-                                    "Content-Type":
-                                        "application/json"
-
-                                },
-
-                                body:
-                                    JSON.stringify({
-
-                                        name:
-                                            name,
-
-                                        answer:
-                                            answer,
-
-                                        message:
-                                            message
-
-                                    })
-
-                            }
-                        );
-
-
-                    let result = {};
-
-                    try {
-
-                        result =
-                            await response.json();
-
-                    } catch (jsonError) {
-
-                        result = {};
-
-                    }
-
-
-                    /* --------------------------
-                       SERVER ERROR
-                    -------------------------- */
-
-                    if (
-                        !response.ok ||
-                        !result.success
-                    ) {
-
-                        throw new Error(
-                            result.message ||
-                            "Не удалось отправить ответ."
-                        );
-
-                    }
-
-
-                    /* --------------------------
-                       SUCCESS
-                    -------------------------- */
-
-                    if (successMessage) {
-
-                        successMessage.textContent =
-                            `Спасибо, ${name}! Твой ответ «${answer}» успешно отправлен.`;
-
-                    }
-
-
-                    if (successModal) {
-
-                        successModal.classList.add(
-                            "active"
-                        );
-
-                    }
-
-
-                    document.body.classList.add(
-                        "no-scroll"
-                    );
-
-
-                    /* --------------------------
-                       RESET FORM
-                    -------------------------- */
-
-                    rsvpForm.reset();
-
-
-                    answerButtons.forEach(
-                        button => {
-
-                            button.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
-
-
-                    if (guestAnswer) {
-
-                        guestAnswer.value =
-                            "";
-
-                    }
-
-
-                    if (formStatus) {
-
-                        formStatus.textContent =
-                            "";
-
-                    }
-
-
-                } catch (error) {
-
-                    console.error(
-                        "RSVP Error:",
-                        error
-                    );
-
-
-                    if (formStatus) {
-
-                        formStatus.textContent =
-                            "Не удалось отправить ответ. Попробуй ещё раз.";
-
-                    }
-
-                } finally {
-
-                    if (submitButton) {
-
-                        submitButton.disabled =
-                            false;
-
-                        submitButton.style.opacity =
-                            "";
-
-                        submitButton.style.pointerEvents =
-                            "";
-
-                    }
-
-                }
+                successMessage.textContent =
+                    "Жаль, что не получится. Спасибо, что сообщил!";
 
             }
+
+        }
+
+
+        successModal.classList.add(
+            "active"
+        );
+
+
+        document.body.classList.add(
+            "no-scroll"
         );
 
     }
 
-
-    /* ==================================================
-       SUCCESS MODAL CLOSE
-    ================================================== */
 
     function closeSuccessModal() {
 
@@ -1136,7 +813,264 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       SCROLL TOP
+       SEND RSVP TO TELEGRAM
+    ================================================== */
+
+    if (rsvpForm) {
+
+        rsvpForm.addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                const nameInput =
+                    document.getElementById(
+                        "guestName"
+                    );
+
+
+                const messageInput =
+                    document.getElementById(
+                        "guestMessage"
+                    );
+
+
+                const name =
+                    nameInput
+                    ? nameInput.value.trim()
+                    : "";
+
+
+                const answer =
+                    guestAnswer
+                    ? guestAnswer.value.trim()
+                    : "";
+
+
+                const message =
+                    messageInput
+                    ? messageInput.value.trim()
+                    : "";
+
+
+                /* VALIDATION */
+
+                if (!name) {
+
+                    if (formStatus) {
+
+                        formStatus.textContent =
+                            "Пожалуйста, введи своё имя.";
+
+                    }
+
+                    if (nameInput) {
+
+                        nameInput.focus();
+
+                    }
+
+                    return;
+
+                }
+
+
+                if (!answer) {
+
+                    if (formStatus) {
+
+                        formStatus.textContent =
+                            "Пожалуйста, выбери свой ответ.";
+
+                    }
+
+                    return;
+
+                }
+
+
+                /* LOADING */
+
+                const submitButton =
+                    rsvpForm.querySelector(
+                        ".submit-button"
+                    );
+
+
+                const originalButtonText =
+                    submitButton
+                    ? submitButton.innerHTML
+                    : "";
+
+
+                if (submitButton) {
+
+                    submitButton.disabled =
+                        true;
+
+
+                    submitButton.innerHTML =
+                        `
+                        <span>
+                            Отправляем...
+                        </span>
+                        `;
+
+                }
+
+
+                if (formStatus) {
+
+                    formStatus.textContent =
+                        "";
+
+                }
+
+
+                try {
+
+
+                    /*
+                       ВАЖНО:
+
+                       Здесь используется
+                       твой Vercel API:
+
+                       /api/telegram
+
+                    */
+
+
+                    const response =
+                        await fetch(
+                            "/api/telegram",
+                            {
+
+                                method:
+                                    "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        name:
+                                            name,
+
+                                        answer:
+                                            answer,
+
+                                        message:
+                                            message
+
+                                    })
+
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (
+                        !response.ok ||
+                        !data.success
+                    ) {
+
+                        throw new Error(
+                            data.message ||
+                            "Ошибка отправки"
+                        );
+
+                    }
+
+
+                    /* SUCCESS */
+
+                    rsvpForm.reset();
+
+
+                    answerButtons.forEach(
+                        button => {
+
+                            button.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    if (guestAnswer) {
+
+                        guestAnswer.value =
+                            "";
+
+                    }
+
+
+                    if (formStatus) {
+
+                        formStatus.textContent =
+                            "";
+
+                    }
+
+
+                    openSuccessModal(
+                        answer
+                    );
+
+
+                } catch (
+                    error
+                ) {
+
+
+                    console.error(
+                        "RSVP Error:",
+                        error
+                    );
+
+
+                    if (formStatus) {
+
+                        formStatus.textContent =
+                            "Не удалось отправить ответ. Попробуй ещё раз.";
+
+                    }
+
+
+                } finally {
+
+
+                    if (submitButton) {
+
+                        submitButton.disabled =
+                            false;
+
+
+                        submitButton.innerHTML =
+                            originalButtonText;
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       SCROLL TO TOP
     ================================================== */
 
     const scrollTop =
@@ -1145,15 +1079,14 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    function updateScrollTop() {
+    function handleScrollTop() {
 
-        if (!scrollTop) {
-            return;
-        }
+        if (!scrollTop) return;
 
 
         if (
-            window.scrollY > 500
+            window.scrollY >
+            600
         ) {
 
             scrollTop.classList.add(
@@ -1173,11 +1106,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener(
         "scroll",
-        updateScrollTop
+        handleScrollTop,
+        { passive: true }
     );
 
 
-    updateScrollTop();
+    handleScrollTop();
 
 
     if (scrollTop) {
@@ -1186,15 +1120,13 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                window.scrollTo({
-
-                    top:
-                        0,
-
-                    behavior:
-                        "smooth"
-
-                });
+                window.scrollTo(
+                    {
+                        top: 0,
+                        behavior:
+                            "smooth"
+                    }
+                );
 
             }
         );
@@ -1203,39 +1135,76 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       MAP BUTTON
+       SMOOTH ANCHOR LINKS
     ================================================== */
 
-    const mapButton =
-        document.getElementById(
-            "mapButton"
-        );
+    document
+        .querySelectorAll(
+            'a[href^="#"]'
+        )
+        .forEach(
+            link => {
+
+                link.addEventListener(
+                    "click",
+                    event => {
+
+                        const targetId =
+                            link.getAttribute(
+                                "href"
+                            );
 
 
-    if (mapButton) {
+                        if (
+                            !targetId ||
+                            targetId === "#"
+                        ) {
+                            return;
+                        }
 
-        mapButton.addEventListener(
-            "click",
-            event => {
 
-                if (
-                    mapButton.getAttribute(
-                        "href"
-                    ) === "#"
-                ) {
+                        const target =
+                            document.querySelector(
+                                targetId
+                            );
 
-                    event.preventDefault();
 
-                    alert(
-                        "Ссылка на карту появится после выбора места проведения."
-                    );
+                        if (!target) {
+                            return;
+                        }
 
-                }
+
+                        event.preventDefault();
+
+
+                        const headerHeight =
+                            header
+                            ? header.offsetHeight
+                            : 0;
+
+
+                        const targetPosition =
+                            target.getBoundingClientRect()
+                                .top +
+                            window.scrollY -
+                            headerHeight;
+
+
+                        window.scrollTo(
+                            {
+                                top:
+                                    targetPosition,
+
+                                behavior:
+                                    "smooth"
+                            }
+                        );
+
+                    }
+                );
 
             }
         );
-
-    }
 
 
     /* ==================================================
@@ -1248,6 +1217,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     if (lightbox) {
+
 
         lightbox.addEventListener(
             "touchstart",
@@ -1283,21 +1253,19 @@ document.addEventListener("DOMContentLoaded", () => {
                         swipeDistance
                     ) < 50
                 ) {
-
                     return;
-
                 }
 
 
                 if (
-                    swipeDistance > 0
+                    swipeDistance < 0
                 ) {
 
-                    showPreviousImage();
+                    showNextImage();
 
                 } else {
 
-                    showNextImage();
+                    showPreviousImage();
 
                 }
 
@@ -1311,33 +1279,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       PRELOAD GALLERY IMAGES
-    ================================================== */
-
-    galleryImages.forEach(
-        imagePath => {
-
-            const image =
-                new Image();
-
-            image.src =
-                imagePath;
-
-        }
-    );
-
-
-    /* ==================================================
        CONSOLE
     ================================================== */
 
     console.log(
-        "Birthday website initialized successfully."
+        "🎉 Birthday website loaded successfully!"
     );
 
     console.log(
-        "Telegram RSVP integration is active."
+        "📅 Event: 08.08.2026"
     );
 
+    console.log(
+        "🕖 Time: 19:00"
+    );
 
 });
